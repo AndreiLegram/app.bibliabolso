@@ -24,9 +24,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Sistema de Gestão</Text>
+        <Text style={styles.title}>app.bibliabolso</Text>
         <Text style={styles.subtitle}>
-          Aplicativo completo com autenticação JWT e CRUD de usuários
+          Controle de Usuários
         </Text>
         
         {user && (
