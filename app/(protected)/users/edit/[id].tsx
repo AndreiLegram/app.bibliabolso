@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  Alert,
   ActivityIndicator,
   ScrollView,
   KeyboardAvoidingView,
@@ -17,6 +16,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { userService } from '../../../../services/api';
 import { theme } from '../../../../styles/theme';
+import alert from '../../../../components/alert';
 
 interface User {
   id: number;
@@ -57,7 +57,7 @@ export default function EditUserScreen() {
         active: user.active,
       });
     } catch (error) {
-      Alert.alert('Erro', 'Falha ao carregar usuário');
+      alert('Erro', 'Falha ao carregar usuário');
       router.back();
     } finally {
       setLoading(false);
@@ -107,17 +107,16 @@ export default function EditUserScreen() {
         active: formData.active,
       };
 
-      // Only include password if it's provided
       if (formData.password) {
         userData.password = formData.password;
       }
 
       await userService.update(Number(id), userData);
-      Alert.alert('Sucesso', 'Usuário atualizado com sucesso', [
+      alert('Sucesso', 'Usuário atualizado com sucesso', [
         { text: 'OK', onPress: () => router.back() }
       ]);
     } catch (error) {
-      Alert.alert('Erro', 'Falha ao atualizar usuário');
+      alert('Erro', 'Falha ao atualizar usuário');
     } finally {
       setSaving(false);
     }

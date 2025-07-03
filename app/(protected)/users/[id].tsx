@@ -6,7 +6,6 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
   ScrollView,
 } from 'react-native';
@@ -14,6 +13,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { userService } from '../../../services/api';
 import { theme } from '../../../styles/theme';
+import alert from '../../../components/alert';
 
 interface User {
   id: number;
@@ -40,7 +40,7 @@ export default function UserDetailScreen() {
       const userData = await userService.getById(Number(id));
       setUser(userData);
     } catch (error) {
-      Alert.alert('Erro', 'Falha ao carregar usuário');
+      alert('Erro', 'Falha ao carregar usuário');
       router.back();
     } finally {
       setLoading(false);
@@ -48,7 +48,8 @@ export default function UserDetailScreen() {
   };
 
   const handleDelete = () => {
-    Alert.alert(
+    console.log('delete');
+    alert(
       'Confirmar Exclusão',
       'Tem certeza que deseja excluir este usuário?',
       [
@@ -59,10 +60,11 @@ export default function UserDetailScreen() {
           onPress: async () => {
             try {
               await userService.delete(Number(id));
-              Alert.alert('Sucesso', 'Usuário excluído com sucesso');
+              alert('Sucesso', 'Usuário excluído com sucesso');
               router.back();
             } catch (error) {
-              Alert.alert('Erro', 'Falha ao excluir usuário');
+              console.log(error);
+              alert('Erro', 'Falha ao excluir usuário');
             }
           },
         },

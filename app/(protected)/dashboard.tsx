@@ -45,7 +45,7 @@ export default function DashboardScreen() {
             <View style={styles.moduleInfo}>
               <Text style={styles.moduleTitle}>Usuários</Text>
               <Text style={styles.moduleDescription}>
-                Gerenciar usuários do sistema - CRUD completo
+                Controle de Usuários
               </Text>
             </View>
             <Ionicons name="chevron-forward" size={24} color={theme.colors.textSecondary} />

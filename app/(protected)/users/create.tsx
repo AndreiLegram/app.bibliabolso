@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  Alert,
   ActivityIndicator,
   ScrollView,
   KeyboardAvoidingView,
@@ -17,6 +16,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { userService } from '../../../services/api';
 import { theme } from '../../../styles/theme';
+import alert from '../../../components/alert';
 
 export default function CreateUserScreen() {
   const [formData, setFormData] = useState({
@@ -76,11 +76,11 @@ export default function CreateUserScreen() {
       };
 
       await userService.create(userData);
-      Alert.alert('Sucesso', 'Usuário criado com sucesso', [
+      alert('Sucesso', 'Usuário criado com sucesso', [
         { text: 'OK', onPress: () => router.back() }
       ]);
     } catch (error) {
-      Alert.alert('Erro', 'Falha ao criar usuário');
+      alert('Erro', 'Falha ao criar usuário');
     } finally {
       setLoading(false);
     }

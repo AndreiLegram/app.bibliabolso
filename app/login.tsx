@@ -6,7 +6,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
@@ -14,6 +13,7 @@ import {
 import { useRouter } from 'expo-router';
 import { useAuth } from '../contexts/AuthContext';
 import { theme } from '../styles/theme';
+import alert from '../components/alert';
 
 export default function LoginScreen() {
   const [username, setUsername] = useState('');
@@ -24,7 +24,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos');
+      alert('Erro', 'Por favor, preencha todos os campos');
       return;
     }
 
@@ -33,7 +33,7 @@ export default function LoginScreen() {
       await login(username, password);
       router.replace('/(protected)/dashboard');
     } catch (error) {
-      Alert.alert('Erro', 'Credenciais inválidas');
+      alert('Erro', 'Credenciais inválidas');
     } finally {
       setLoading(false);
     }
